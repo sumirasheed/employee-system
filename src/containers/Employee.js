@@ -3,7 +3,7 @@ import { Container,Row, Col } from 'react-bootstrap';
 import EmployeeForm from '../components/Form';
 import EmployeeTable from '../components/Table';
 class Employee extends Component {
-    userData;
+    userData=[];
     constructor(props) {
         super(props);
         this.state = {
@@ -12,7 +12,8 @@ class Employee extends Component {
             department: '',
             bloodg:'',
             address:'',
-            phone:''
+            phone:'',
+            showField:false
         }
     }
 
@@ -41,10 +42,6 @@ class Employee extends Component {
         }
     }
 
-    // componentWillUpdate(nextProps, nextState) {
-    //     localStorage.setItem('user', JSON.stringify(nextState));
-    // }
-
     submitForm(e) {
         e.preventDefault()
         localStorage.setItem('document',JSON.stringify(this.state));
@@ -54,7 +51,8 @@ class Employee extends Component {
                 department: '',
                 bloodg:'',
                 address: '',
-                phone: ''
+                phone: '',
+                showField:true
         })
     }
 
@@ -79,7 +77,7 @@ class Employee extends Component {
                                 address={this.state.address} phone={this.state.phone} />
                             </Col>
                             <Col md={8}>
-                                <EmployeeTable /> 
+                                <EmployeeTable userData={this.userData} showField={this.state.showField}/> 
                             </Col> 
                         </Row>
                     </div>

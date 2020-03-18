@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 
 const EmployeeTable = (props) => {
+    console.log(props.userData)
     return (
         <Table striped bordered hover>
             <thead>
@@ -16,29 +17,22 @@ const EmployeeTable = (props) => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>sdjdshjfhkdsjhkhksd</td>
-                    <td>@fat</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td colSpan="5">Larry the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+                {/* {props.showField && props.userData && props.userData.map((item,key)=>{
+                    return(
+                    <tr>
+                        <td>{key}</td>
+                        <td>{item.name}</td>
+                        <td>{item.age}</td>
+                        <td>{item.department}</td>
+                        <td>{item.bloodg}</td>
+                        <td>{item.address}</td>
+                        <td>{item.phone}</td>
+                    </tr>
+                    );
+                })} */}
+               
+                
+                
             </tbody>
         </Table>
     );

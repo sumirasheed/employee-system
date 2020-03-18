@@ -2,66 +2,65 @@ import React, { Component } from 'react';
 import { Container,Row, Col } from 'react-bootstrap';
 import EmployeeForm from '../components/Form';
 import EmployeeTable from '../components/Table';
+import { Thumbnail } from 'react-bootstrap';
 class Employee extends Component {
-    userData=[];
+    userData;
     constructor(props) {
         super(props);
         this.state = {
+            id:null,
             name: '',
             age: '',
             department: '',
             bloodg:'',
-            address:'',
-            phone:'',
-            showField:false
+            address: '',
+            phone: '',
+            users:[],
         }
     }
 
      // React Life Cycle
-     componentDidMount() {
-        this.userData = JSON.parse(localStorage.getItem('document'));
-
-        if (localStorage.getItem('document')) {
-            this.setState({
-                name: this.userData.name,
-                age: this.userData.age,
-                department: this.userData.department,
-                bloodg:this.userData.bloodg,
-                address: this.userData.address,
-                phone: this.userData.phone,
-            })
-        } else {
-            this.setState({
-                name: '',
-                age: '',
-                department: '',
-                bloodg:'',
-                address: '',
-                phone: ''
-            })
-        }
+    componentDidMount() {
+        this.getDataFromLocal(); 
     }
 
+    getDataFromLocal = () => {
+        this.userData = JSON.parse(localStorage.getItem('users'));
+        if (this.userData) {
+            console.log('Blah')
+            this.setState({
+                users: this.userData,
+            });
+        } 
+        console.log(this.state.users)
+    }
+    setDataToLocal = () =>{
+        localStorage.setItem('users',JSON.stringify(this.state.users)) 
+    }
     submitForm(e) {
-        e.preventDefault()
-        localStorage.setItem('document',JSON.stringify(this.state));
+        e.preventDefault();
+        this.getDataFromLocal();
+        let users = this.state.users
+        let user ={
+            id:users.length+1,
+            name: this.state.name,
+            age: this.state.age,
+            department: this.state.department,
+            bloodg:this.state.bloodg,
+            address:this.state.address,
+            phone:this.state.phone,
+        }
+        users.push(user);
         this.setState({
-             name: '',
-                age: '',
-                department: '',
-                bloodg:'',
-                address: '',
-                phone: '',
-                showField:true
-        })
+            users: users,
+        },this.setDataToLocal); 
     }
 
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         });
-    }
-    
+    }    
 
     render() {
         return (
@@ -77,7 +76,7 @@ class Employee extends Component {
                                 address={this.state.address} phone={this.state.phone} />
                             </Col>
                             <Col md={8}>
-                                <EmployeeTable userData={this.userData} showField={this.state.showField}/> 
+                                <EmployeeTable users={this.state.users}/> 
                             </Col> 
                         </Row>
                     </div>

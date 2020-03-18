@@ -18,9 +18,9 @@ class Employee extends Component {
 
      // React Life Cycle
      componentDidMount() {
-        this.userData = JSON.parse(localStorage.getItem('user'));
+        this.userData = JSON.parse(localStorage.getItem('document'));
 
-        if (localStorage.getItem('user')) {
+        if (localStorage.getItem('document')) {
             this.setState({
                 name: this.userData.name,
                 age: this.userData.age,
@@ -41,20 +41,20 @@ class Employee extends Component {
         }
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        localStorage.setItem('user', JSON.stringify(nextState));
-    }
+    // componentWillUpdate(nextProps, nextState) {
+    //     localStorage.setItem('user', JSON.stringify(nextState));
+    // }
 
     submitForm(e) {
         e.preventDefault()
-
+        localStorage.setItem('document',JSON.stringify(this.state));
         this.setState({
-            name: '',
-            age: '',
-            department: '',
-            bloodg:'',
-            address: '',
-            phone: ''
+             name: '',
+                age: '',
+                department: '',
+                bloodg:'',
+                address: '',
+                phone: ''
         })
     }
 

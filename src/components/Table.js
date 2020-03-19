@@ -2,7 +2,16 @@ import React from 'react';
 import { Table, Alert } from 'react-bootstrap';
 
 const EmployeeTable = (props) => {
-    console.log(props.users)
+    let phoneChildren=[],addressChildren=[];
+    props.users.map((user,key)=>{
+        user.phone.forEach((item,index)=>{
+            phoneChildren.push(<p key={index}>{item}</p>)
+        })
+        user.address.forEach((item,index)=>{
+            addressChildren.push(<p key={index}>{item}</p>) 
+        })
+    })
+    console.log(props.users.phone)
     return (
         <>
             {(props.users.length>0)? 
@@ -27,8 +36,8 @@ const EmployeeTable = (props) => {
                                     <td>{item.age}</td>
                                     <td>{item.department}</td>
                                     <td>{item.bloodg}</td>
-                                    <td>{item.address}</td>
-                                    <td>{item.phone}</td>
+                                    <td>{addressChildren}</td>
+                                    <td>{phoneChildren}</td>
                                 </tr>
                             );
                         })}
